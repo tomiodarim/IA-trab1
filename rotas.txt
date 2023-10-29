@@ -1,0 +1,6 @@
+rota(foz,brasilia,50).
+rota(foz,curitiba,100).
+rota(curitiba,saopaulo,200).
+rota(saopaulo,belohorizontbrasilia,20).
+rota(brasilia,saopaulo,30).
+rota(brasilia,belohorizontbrasilia,70).
