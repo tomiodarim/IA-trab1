@@ -29,25 +29,29 @@ menor_caminho(X, Y, ValorMin, Caminho) :-
         ValorMenor < ValorMin).
 
 % printa um nó do caminho
-% write_node(+Node)
-write_node(Node) :-
-    swritef(S, '-> %w ', [Node]),
+% write_node(+Node, +IsLast)
+write_node(Node, IsLast) :-
+    (IsLast -> swritef(S, '%w \n', [Node]) ; swritef(S, '%w -> ', [Node])),
     write(S).
+
+% Predicado auxiliar para imprimir a lista de nós com o tratamento adequado para o último
+print_nodes([Node]) :- write_node(Node, true).
+print_nodes([Node|Rest]) :- write_node(Node, false), print_nodes(Rest).
 
 % imprime na tela as informações caminho de menor valor
 % trajeto_mais_economico(+Partida, +Chegada)
 trajeto_mais_economico(Partida, Chegada) :-
     writeln(''),
     ( rota(Partida, _, _) -> true ; writeln('Partida não existe') ),
-    ( rota(_, Chegada, _) -> true ; writeln('Chegada não nexiste') ),
+    ( rota(_, Chegada, _) -> true ; writeln('Chegada não existe') ),
 
     menor_caminho(Partida, Chegada, ValorTotal, Caminho),
+    append(Caminho, [Chegada], L),
 
     % printa resultados 
     write('Cidades passadas: '),
-    append(Caminho, [Chegada], L),
-    maplist(write_node, L),
-    swritef(S, '\n%w%d', ['Valor total: R$', ValorTotal]), writeln(S).
+    print_nodes(L),
+    swritef(S, '%w%d', ['Valor total: R$', ValorTotal]), writeln(S).
 
 :- initialization(main, main).
 % main(+Argv)
