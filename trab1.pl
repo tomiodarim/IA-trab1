@@ -1,4 +1,7 @@
 % rota(+X, +Y, -Valor, -Caminho)
+rota(X, X, 0, []).
+
+% rota(+X, +Y, -Valor, -Caminho)
 rota(X, Y, Valor, Caminho) :- rota(X, Y, Valor, [], Caminho).
 
 % condicao de parada (quando acaba a lista de nos)
