@@ -4,3 +4,7 @@ rota(curitiba,saopaulo,200).
 rota(saopaulo,belohorizonte,20).
 rota(brasilia,saopaulo,30).
 rota(brasilia,belohorizonte,70).
+rota(saopaulo,fortaleza,49).
+rota(fortaleza,manaus,90).
+rota(manaus,riobranco,100).
+rota(foz,riobranco,2000).
